@@ -2,20 +2,14 @@
 <section>
   <h2>Nossos Produtos</h2>
 
-  <div class="lista-produtos">
+  
+<div class="lista-produtos">
+  @for (produto of produtos; track produto.id) {
     <app-product-card
-      nome="Perfume de Rosas"
-      [preco]="89.90">
+      [nome]="produto.nome"
+      [preco]="produto.preco">
     </app-product-card>
+  }
+</div>
 
-    <app-product-card
-      nome="Batom Rosa"
-      [preco]="29.90">
-    </app-product-card>
-
-    <app-product-card
-      nome="Creme Hidratante"
-      [preco]="49.90">
-    </app-product-card>
-  </div>
 </section>
