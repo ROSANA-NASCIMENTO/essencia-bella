@@ -1,1 +1,6 @@
-<p>product-card works!</p>
+
+<article>
+  <h3>{{ nome() }}</h3>
+  <p>Preço: {{ preco() | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</p>
+  <button>Ver detalhes</button>
+</article>

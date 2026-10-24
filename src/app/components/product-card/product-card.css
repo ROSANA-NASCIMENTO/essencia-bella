@@ -1,0 +1,32 @@
+
+article {
+  background-color: #ffffff;
+  border: 1px solid #eeeeee;
+  border-radius: 10px;
+  padding: 20px;
+  width: 220px;
+  box-shadow: 0 2px 8px #00000015;
+ }
+
+h3 {
+  color: #a64d79;
+}
+
+p {
+  color: #666666;
+}
+
+button {
+  background-color: #a64d79;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+
+
+
+
+

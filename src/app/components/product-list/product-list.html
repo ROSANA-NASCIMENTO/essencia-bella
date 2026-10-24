@@ -2,6 +2,20 @@
 <section>
   <h2>Nossos Produtos</h2>
 
-  <app-product-card></app-product-card>
-</section>
+  <div class="lista-produtos">
+    <app-product-card
+      nome="Perfume de Rosas"
+      [preco]="89.90">
+    </app-product-card>
 
+    <app-product-card
+      nome="Batom Rosa"
+      [preco]="29.90">
+    </app-product-card>
+
+    <app-product-card
+      nome="Creme Hidratante"
+      [preco]="49.90">
+    </app-product-card>
+  </div>
+</section>
