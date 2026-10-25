@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+
+import { Component, signal } from '@angular/core';
 import { ProductCard } from '../product-card/product-card';
+import { Product } from '../../services/product';
 
 @Component({
   imports: [ProductCard],
@@ -7,14 +9,48 @@ import { ProductCard } from '../product-card/product-card';
   styleUrl: './product-list.css',
   templateUrl: './product-list.html',
 })
-
 export class ProductList {
-  produtos = [
-    { id: 1, nome: 'Perfume de Rosas', preco: 89.90 },
-    { id: 2, nome: 'Batom Rosa', preco: 79.90 },
-    { id: 3, nome: 'Creme Hidratante', preco: 49.90 },
-    { id: 4, nome: 'Sabonete Facial', preco: 24.90 }
 
-  ];
+ produtos = signal<{ id: number; nome: string; preco: number }[]>([]);
+
+  constructor(private productService: Product) {
+
+    this.productService.buscarProdutos().subscribe((resposta) => {
+      const dados = resposta as {
+        products: {
+          id: number;
+          title: string;
+          price: number;
+        }[];
+      };
+
+      const cosmeticos = dados.products.map((produto) => ({
+        id: produto.id,
+        nome: produto.title,
+        preco: produto.price
+      }));
+
+      this.produtos.update(atuais => [...atuais, ...cosmeticos]);
+    });
+
+    this.productService.buscarPerfumes().subscribe((resposta) => {
+      const dados = resposta as {
+        products: {
+          id: number;
+          title: string;
+          price: number;
+        }[];
+      };
+
+      const perfumes = dados.products.map((produto) => ({
+        id: produto.id,
+        nome: produto.title,
+        preco: produto.price
+      }));
+
+      this.produtos.update(atuais => [...atuais, ...perfumes]);
+    });
+
+  }
+
 }
-

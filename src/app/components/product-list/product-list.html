@@ -1,10 +1,10 @@
 
 <section>
   <h2>Nossos Produtos</h2>
-
+  
   
 <div class="lista-produtos">
-  @for (produto of produtos; track produto.id) {
+  @for (produto of produtos(); track produto.id) {
     <app-product-card
       [nome]="produto.nome"
       [preco]="produto.preco">
