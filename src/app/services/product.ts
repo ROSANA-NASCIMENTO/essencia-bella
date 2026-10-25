@@ -14,8 +14,12 @@ export class Product {
   buscarPerfumes() {
     return this.http.get(
       'https://dummyjson.com/products/category/fragrances'
-    );
-  
-  }
+    );}
+
+  buscarCuidadosPele() {
+  return this.http.get(
+    'https://dummyjson.com/products/category/skin-care'
+  );
+}
 
 }

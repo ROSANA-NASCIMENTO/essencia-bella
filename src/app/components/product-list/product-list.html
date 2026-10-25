@@ -7,7 +7,9 @@
   @for (produto of produtos(); track produto.id) {
     <app-product-card
       [nome]="produto.nome"
-      [preco]="produto.preco">
+      [preco]="produto.preco"
+      [imagem]="produto.imagem"
+      [descricao]="produto.descricao">
     </app-product-card>
   }
 </div>
