@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { selectItensCarrinho } from '../../store/cart/cart.selectors';
 
 @Component({
   imports: [],
@@ -6,4 +8,8 @@ import { Component } from '@angular/core';
   styleUrl: './checkout.css',
   templateUrl: './checkout.html',
 })
-export class Checkout {}
+export class Checkout {
+  private store = inject(Store);
+
+  itensCarrinho = this.store.selectSignal(selectItensCarrinho);
+}

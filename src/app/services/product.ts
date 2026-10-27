@@ -22,4 +22,10 @@ export class Product {
   );
 }
 
+buscarProdutoPorId(id: number) {
+  return this.http.get(
+    `https://dummyjson.com/products/${id}`
+  );
+}
+
 }

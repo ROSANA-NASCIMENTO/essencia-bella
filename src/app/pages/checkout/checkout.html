@@ -1,1 +1,15 @@
-<p>checkout works!</p>
+<section>
+  <h2>Meu Carrinho de Compras</h2>
+
+  <p>Confira os produtos escolhidos:</p>
+
+  @for (item of itensCarrinho(); track $index) {
+    <article>
+      <h3>{{ item.nome }}</h3>
+      <img [src]="item.imagem" [alt]="item.nome" width="100">
+      <p>Preço: {{ item.preco }}</p>
+    </article>
+  } @empty {
+    <p>Seu carrinho está vazio.</p>
+  }
+</section>

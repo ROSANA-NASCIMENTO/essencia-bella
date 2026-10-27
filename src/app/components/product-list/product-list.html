@@ -6,6 +6,7 @@
 <div class="lista-produtos">
   @for (produto of produtos(); track produto.id) {
     <app-product-card
+      [id]="produto.id"
       [nome]="produto.nome"
       [preco]="produto.preco"
       [imagem]="produto.imagem"
