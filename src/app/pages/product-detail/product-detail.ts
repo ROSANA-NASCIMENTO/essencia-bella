@@ -1,12 +1,16 @@
-import { Component, inject, signal } from '@angular/core';  
-import { ActivatedRoute } from '@angular/router';
+import { Component, inject, signal } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Product } from '../../services/product';
 import { CurrencyPipe, UpperCasePipe } from '@angular/common';
-import { Store } from '@ngrx/store';
-import { adicionarProduto } from '../../store/cart/cart.actions'; 
-import { selectItensCarrinho } from '../../store/cart/cart.selectors';
-import { take } from 'rxjs';
-import { RouterLink } from '@angular/router'; 
+import { CartService } from '../../services/cart';
+
+interface ProdutoDetalhe {
+  id: number;
+  title: string;
+  price: number;
+  thumbnail: string;
+  description: string;
+}
 
 @Component({
   imports: [CurrencyPipe, UpperCasePipe, RouterLink],
@@ -14,48 +18,42 @@ import { RouterLink } from '@angular/router';
   styleUrl: './product-detail.css',
   templateUrl: './product-detail.html',
 })
-export class ProductDetail
-
-
-{
-  produto = signal<any>(null);
-
+export class ProductDetail {
+  produto = signal<ProdutoDetalhe | null>(null);
+  erro = signal(false);
   private route = inject(ActivatedRoute);
-
   private productService = inject(Product);
-  private store = inject(Store);
+  private cartService = inject(CartService);
 
-  id = this.route.snapshot.paramMap.get('id');
+  adicionarAoCarrinho(): void {
+    const produto = this.produto();
+    if (!produto) return;
 
-  constructor() {
-    if (this.id !== null) {
-      this.productService
-        .buscarProdutoPorId(Number(this.id))
-        .subscribe(produto => {
-  this.produto.set(produto);
-  console.log(this.produto());
-});      
-    }
+    this.cartService.adicionar({
+      id: produto.id,
+      nome: produto.title,
+      preco: produto.price,
+      imagem: produto.thumbnail,
+      descricao: produto.description
+    });
   }
 
-  adicionarAoCarrinho() {
-  console.log('Botão Adicionar ao carrinho foi clicado!');
-
-  const p = this.produto();
-
-  if (p) {
-    this.store.dispatch(adicionarProduto({
-      produto: {
-        id: p.id,
-        nome: p.title,
-        preco: p.price,
-        imagem: p.thumbnail,
-        descricao: p.description
-      }
-    }));
-
-    console.log('Produto enviado ao NgRx:', p.title);
-    this.store.select(selectItensCarrinho).pipe(take(1)).subscribe(itens => {
-  console.log('Produtos armazenados no carrinho:', itens);
-});
-  }}}
+  constructor() {
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    if (id > 0) {
+      this.productService.buscarProdutoPorId(id).subscribe({
+        next: resposta => {
+          const produto = resposta as ProdutoDetalhe;
+          this.produto.set({
+            ...produto,
+            title: this.productService.traduzirNome(produto.title),
+            description: this.productService.traduzirDescricao(produto.title)
+          });
+        },
+        error: () => this.erro.set(true)
+      });
+    } else {
+      this.erro.set(true);
+    }
+  }
+}

@@ -2,6 +2,7 @@ import { Component, input } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { TruncatePipe } from '../../pipes/truncate-pipe';
 import { RouterLink } from '@angular/router';
+import { output } from '@angular/core';
 
 @Component({
   imports: [CurrencyPipe, TruncatePipe, RouterLink],
@@ -15,4 +16,9 @@ export class ProductCard {
   preco = input<number>(89.90);
   imagem = input<string>('');
   descricao = input<string>('');
+  adicionar = output<void>();
+
+  clicouComprar(): void {
+    this.adicionar.emit();
+  }
 }

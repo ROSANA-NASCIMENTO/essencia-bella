@@ -1,18 +1,16 @@
-
-<section>
+<section class="vitrine">
   <h2>Nossos Produtos</h2>
-  
-  
-<div class="lista-produtos">
-  @for (produto of produtos(); track produto.id) {
-    <app-product-card
-      [id]="produto.id"
-      [nome]="produto.nome"
-      [preco]="produto.preco"
-      [imagem]="produto.imagem"
-      [descricao]="produto.descricao">
-    </app-product-card>
-  }
-</div>
-
+  <label class="busca-label" for="busca">Buscar produtos</label>
+  <input id="busca" class="campo-busca" type="search" [formControl]="busca" placeholder="Digite o nome do produto..." />
+  @if (carregando()) { <p>Carregando produtos...</p> }
+  @if (erro()) { <p>Não foi possível carregar todos os produtos. Tente atualizar a página.</p> }
+  <div class="lista-produtos">
+    @for (produto of produtosFiltrados(); track produto.id) {
+      <app-product-card [id]="produto.id" [nome]="produto.nome"
+        [preco]="produto.preco" [imagem]="produto.imagem"
+        [descricao]="produto.descricao" (adicionar)="adicionarAoCarrinho(produto)" />
+    } @empty {
+      @if (!carregando() && !erro()) { <p>Nenhum produto encontrado.</p> }
+    }
+  </div>
 </section>

@@ -40,3 +40,9 @@ img {
 
 
 
+
+.acoes-card { display: flex; flex-direction: column; gap: 9px; margin-top: auto; }
+.acoes-card button { margin-top: 0; font-weight: 600; min-height: 40px; transition: background-color .2s; }
+.acoes-card button:hover { background-color: #87395e; }
+.acoes-card .btn-secundario { background: #fff; color: #a64d79; border: 1px solid #a64d79; }
+.acoes-card .btn-secundario:hover { background: #fbedf4; }

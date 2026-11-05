@@ -1,0 +1,18 @@
+.checkout { max-width: 760px; margin: 24px auto; padding: 20px; }
+.item { display: flex; align-items: center; gap: 20px; border-bottom: 1px solid #ddd; padding: 12px 0; }
+form { display: grid; gap: 12px; }
+label { display: grid; gap: 4px; }
+input { padding: 10px; border: 1px solid #bbb; border-radius: 5px; }
+button { padding: 12px; cursor: pointer; }
+button:disabled { opacity: .5; cursor: not-allowed; }
+.sucesso { font-weight: bold; }
+
+.checkout h2 { color: #a64d79; }
+.checkout button { background: #a64d79; color: white; border: 1px solid #a64d79; border-radius: 6px; font-weight: 600; }
+.checkout button:not(:disabled):hover { background: #87395e; }
+.checkout button.secundario, .checkout button.remover { background: white; color: #a64d79; }
+.checkout button.secundario:hover, .checkout button.remover:hover { background: #fbedf4; }
+.item-descricao { flex: 1; }
+.item .remover { margin-left: auto; }
+.sucesso { color: #28794b; font-size: 1.2rem; }
+.erro { color: #a42e45; }

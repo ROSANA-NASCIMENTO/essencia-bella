@@ -4,5 +4,8 @@
   <h3>{{ nome() }}</h3>
   <p>{{ descricao() | truncate: 50 }}</p>
   <p>Preço: {{ preco() | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</p>
-  <button [routerLink]="['/produto', id()]">Ver detalhes</button>
+  <div class="acoes-card">
+    <button type="button" (click)="clicouComprar()">Adicionar ao carrinho</button>
+    <button type="button" class="btn-secundario" [routerLink]="['/produto', id()]">Ver detalhes</button>
+  </div>
 </article>

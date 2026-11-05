@@ -1,0 +1,8 @@
+ :host { display: block; }
+h2 { color: #a64d79; }
+img { max-width: min(340px, 90%); max-height: 300px; object-fit: contain; }
+.acoes-detalhe { display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0; }
+.acoes-detalhe button { background: #a64d79; color: white; border: 1px solid #a64d79; border-radius: 6px; padding: 12px 20px; cursor: pointer; font-weight: 600; }
+.acoes-detalhe button:hover { background: #87395e; }
+.acoes-detalhe .secundario { background: white; color: #a64d79; }
+.acoes-detalhe .secundario:hover { background: #fbedf4; }

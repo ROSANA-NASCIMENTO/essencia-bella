@@ -1,14 +1,92 @@
 
-header {
-  background-color: #fce4ec;
-  padding: 20px;
+header.cabecalho {
+  background: #fce4ec;
+  padding: 18px 28px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 18px;
+  position: relative;
+  min-height: 79px;
+}
+
+/* Nome e subtítulo centralizados */
+.marca {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   text-align: center;
+  white-space: nowrap;
 }
 
-h1 {
+.marca h1 {
   color: #a64d79;
+  margin: 0;
 }
 
-p {
-  color: #666666;
+.marca p {
+  color: #666;
+  margin: 4px 0 0;
+}
+
+/* Menu à direita */
+nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+nav a {
+  color: #87395e;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+.link-carrinho {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Contador do carrinho */
+.contador {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 23px;
+  height: 23px;
+  padding: 0 5px;
+  box-sizing: border-box;
+  background: #a64d79;
+  color: #fff;
+  border-radius: 14px;
+  font-size: 13px;
+}
+
+/* Ajuste para telas pequenas */
+@media (max-width: 700px) {
+  header.cabecalho {
+    flex-direction: column;
+    padding: 18px;
+    gap: 15px;
+  }
+
+  .marca {
+    position: static;
+    transform: none;
+    white-space: normal;
+  }
+
+  nav {
+    justify-content: center;
+  }
+}
+/* Esconder o link Início quando já estamos na Home */
+
+nav a.rota-inicio {
+  display: none;
 }

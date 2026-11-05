@@ -1,8 +1,9 @@
+.lista-produtos { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 20px; padding: 0 30px; }
+@media (max-width: 1000px) { .lista-produtos { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 650px) { .lista-produtos { grid-template-columns: repeat(1, minmax(0, 1fr)); padding: 0 12px; } }
 
-
-.lista-produtos {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 20px;
-  padding: 0 30px;
-}
+.vitrine { max-width: 1350px; margin: 0 auto; padding-bottom: 35px; }
+.vitrine h2 { text-align: center; color: #a64d79; }
+.busca-label { display: block; margin: 10px 30px 6px; font-weight: 600; color: #87395e; }
+.campo-busca { display: block; margin: 0 30px 22px; width: min(450px, calc(100% - 60px)); padding: 12px; border: 1px solid #d5a4bc; border-radius: 8px; font: inherit; }
+@media (max-width:650px) { .campo-busca { margin-left:12px; } .busca-label { margin-left:12px; } }

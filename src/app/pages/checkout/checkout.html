@@ -1,15 +1,35 @@
-<section>
+<section class="checkout">
   <h2>Meu Carrinho de Compras</h2>
-
-  <p>Confira os produtos escolhidos:</p>
-
-  @for (item of itensCarrinho(); track $index) {
-    <article>
-      <h3>{{ item.nome }}</h3>
-      <img [src]="item.imagem" [alt]="item.nome" width="100">
-      <p>Preço: {{ item.preco }}</p>
-    </article>
-  } @empty {
-    <p>Seu carrinho está vazio.</p>
+  @if (pedidoConcluido()) {
+    <p class="sucesso">Pedido finalizado com sucesso!</p>
+    <a routerLink="/">Voltar à loja</a>
+  } @else {
+    @for (item of itensCarrinho(); track $index) {
+      <article class="item">
+        <img [src]="item.imagem" [alt]="item.nome" width="90">
+        <div class="item-descricao"><h3>{{ item.nome }}</h3><p>{{ item.preco | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</p></div>
+        <button type="button" class="remover" (click)="remover($index)" [attr.aria-label]="'Remover ' + item.nome">Remover</button>
+      </article>
+    } @empty {
+      <p>Seu carrinho está vazio.</p>
+      <a routerLink="/">Escolher produtos</a>
+    }
+    @if (itensCarrinho().length > 0) {
+      <h3>Total: {{ total() | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</h3>
+      <button type="button" class="secundario" (click)="limpar()">Limpar carrinho</button>
+      <h2>Dados para entrega</h2>
+      <form [formGroup]="formulario" (ngSubmit)="finalizarPedido()">
+        <label>Nome completo <input formControlName="nome" autocomplete="name"></label>
+        <label>E-mail <input formControlName="email" type="email" autocomplete="email"></label>
+        <label>CEP <input formControlName="cep" placeholder="00000-000"></label>
+        <label>Endereço <input formControlName="endereco"></label>
+        <label>Número <input formControlName="numero"></label>
+        <label>Complemento <input formControlName="complemento"></label>
+        <label>Cidade <input formControlName="cidade"></label>
+        <label>Estado (UF) <input formControlName="estado" maxlength="2" placeholder="RJ"></label>
+        @if (formulario.invalid && formulario.touched) { <p class="erro">Confira os campos obrigatórios, o e-mail e o CEP.</p> }
+        <button type="submit" [disabled]="formulario.invalid">Finalizar pedido</button>
+      </form>
+    }
   }
 </section>
